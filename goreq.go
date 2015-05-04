@@ -325,6 +325,11 @@ func (r Request) Do() (*Response, error) {
 	}
 
 	res, err := client.Do(req)
+	//If resUri is blank, then we didn't have any redirection. Return original URL
+	if resUri == ""  {
+		resUri = req.URL.String()
+	}
+	
 	if timer != nil {
 		timer.Stop()
 	}
